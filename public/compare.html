@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Compare with design</title>
+    <style>
+      body { margin: 0; font: 13px system-ui, sans-serif; background: #333; color: #fff; }
+      .bar { display: flex; gap: 12px; align-items: center; padding: 8px 12px; }
+      .stage { position: relative; width: 1200px; height: 780px; }
+      iframe { width: 1200px; height: 780px; border: 0; display: block; background: #fff; }
+      img { position: absolute; inset: 0; width: 1200px; height: 780px; pointer-events: none; }
+    </style>
+  </head>
+  <body>
+    <div class="bar">
+      Design overlay opacity
+      <input id="op" type="range" min="0" max="1" step="0.05" value="0.5" />
+      <label><input id="diff" type="checkbox" /> difference mode</label>
+    </div>
+    <div class="stage">
+      <iframe src="/"></iframe>
+      <img id="ref" src="/reference.png" alt="" style="opacity: 0.5" />
+    </div>
+    <script>
+      const ref = document.getElementById('ref')
+      document.getElementById('op').oninput = (e) => (ref.style.opacity = e.target.value)
+      document.getElementById('diff').onchange = (e) => (ref.style.mixBlendMode = e.target.checked ? 'difference' : 'normal')
+    </script>
+  </body>
+</html>
